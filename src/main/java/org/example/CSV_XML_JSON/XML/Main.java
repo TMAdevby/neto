@@ -30,7 +30,6 @@ public class Main {
 //        read(root);
 
 
-
         // создание и запись
 //        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //        DocumentBuilder builder = factory.newDocumentBuilder();
@@ -65,11 +64,11 @@ public class Main {
         Document doc = builder.parse(new File("company.xml"));
 
         NodeList nodeList = doc.getElementsByTagName("employee");
-        for(int i = 0; i < nodeList.getLength(); i++) {
+        for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
-            if(Node.ELEMENT_NODE == node.getNodeType()){
+            if (Node.ELEMENT_NODE == node.getNodeType()) {
                 Element innerElement = (Element) node;
-                if(innerElement.getAttribute("id").equals("2")){
+                if (innerElement.getAttribute("id").equals("2")) {
                     innerElement.getElementsByTagName("tool").item(0).setTextContent("123099");
                 }
             }
@@ -99,7 +98,6 @@ public class Main {
 //            }
 //        }
 //    }
-
 
 
 }

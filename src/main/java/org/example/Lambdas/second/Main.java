@@ -15,7 +15,7 @@ public class Main {
             }
         });*/
 
-        Collections.sort(cities,(a, b) -> a.compareTo(b));
+        Collections.sort(cities, (a, b) -> a.compareTo(b));
 
         System.out.println(cities);
     }

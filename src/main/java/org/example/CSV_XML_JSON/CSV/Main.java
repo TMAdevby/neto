@@ -79,13 +79,13 @@ public class Main {
 //        }
 
         List<Employee> staff = new ArrayList<>();
-        staff.add(new Employee(1,"Nikita","Shumskii","Russia",40));
-        staff.add(new Employee(2,"Pavel","Shramko","Russia",30));
+        staff.add(new Employee(1, "Nikita", "Shumskii", "Russia", 40));
+        staff.add(new Employee(2, "Pavel", "Shramko", "Russia", 30));
         ColumnPositionMappingStrategy<Employee> strategy =
                 new ColumnPositionMappingStrategy<>();
         strategy.setType(Employee.class);
-        strategy.setColumnMapping("id","firstName","country","age");
-        try(Writer writer = new FileWriter("staff_2.csv")){
+        strategy.setColumnMapping("id", "firstName", "country", "age");
+        try (Writer writer = new FileWriter("staff_2.csv")) {
             StatefulBeanToCsv<Employee> sbc =
                     new StatefulBeanToCsvBuilder<Employee>(writer)
                             .withMappingStrategy(strategy)

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        File file = new File("dir1/dir2/dir3","Hello2.txt");
+        File file = new File("dir1/dir2/dir3", "Hello2.txt");
 //        file.getParentFile().mkdirs();  //создать папки без файла
 //
 //        try {
@@ -21,10 +21,10 @@ public class Main {
 
         //посмотреть что в папке
         File file2 = new File("dir1");
-        for(File f : file2.listFiles()){
-            if(f.isFile()){
+        for (File f : file2.listFiles()) {
+            if (f.isFile()) {
                 System.out.println("File: " + f.getName());
-            }else{
+            } else {
                 System.out.println("Directory: " + f.getName());
             }
         }

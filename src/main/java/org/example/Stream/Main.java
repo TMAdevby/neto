@@ -14,7 +14,7 @@ public class Main {
         System.out.println(count);*/
 
 
-        int[] input = {50,60,70,80,90,100};
+        int[] input = {50, 60, 70, 80, 90, 100};
         List<Integer> result = Arrays.stream(input)
                 .filter(x -> x < 90)
                 .map(x -> x += 10)

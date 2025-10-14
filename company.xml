@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><root>
-        <company>
-            <staff>
-                <employee firstname="Иван" id="1" lastname="Иванов"/>
-                <employee firstname="Петр" id="2" lastname="Петров">
-                    <tool>123099</tool>
-                </employee>
-            </staff>
-            <equipment>
-                <tool id="123098">Отвертка</tool>
-                <tool id="123099">Перфаратор</tool>
-            </equipment>
-        </company>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <company>
+        <staff>
+            <employee firstname="Иван" id="1" lastname="Иванов"/>
+            <employee firstname="Петр" id="2" lastname="Петров">
+                <tool>123099</tool>
+            </employee>
+        </staff>
+        <equipment>
+            <tool id="123098">Отвертка</tool>
+            <tool id="123099">Перфаратор</tool>
+        </equipment>
+    </company>
 </root>
