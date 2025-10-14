@@ -32,50 +32,73 @@ public class Main {
 
 
         // создание и запись
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        DocumentBuilder builder = factory.newDocumentBuilder();
+//        Document document = builder.newDocument();
+//        Element root = document.createElement("root");
+//        document.appendChild(root);
+//        Element company = document.createElement("company");
+//        root.appendChild(company);
+//        Element equipment = document.createElement("equipment");
+//        company.appendChild(equipment);
+//        Element staff = document.createElement("staff");
+//        company.appendChild(staff);
+//        Element employee = document.createElement("employee");
+//        employee.setAttribute("id","3");
+//        employee.setAttribute("firstname","Nikita");
+//        employee.setAttribute("lastname","Shumski");
+//        staff.appendChild(employee);
+//        Element tool = document.createElement("tool");
+//        tool.appendChild(document.createTextNode("123456"));
+//        employee.appendChild(tool);
+//
+//        DOMSource domSource = new DOMSource(document);
+//        StreamResult streamResult = new StreamResult(new File("new_company.xml"));
+//        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//        Transformer transformer = transformerFactory.newTransformer();
+//        transformer.transform(domSource, streamResult);
+
+
+        //редактирование
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.newDocument();
-        Element root = document.createElement("root");
-        document.appendChild(root);
-        Element company = document.createElement("company");
-        root.appendChild(company);
-        Element equipment = document.createElement("equipment");
-        company.appendChild(equipment);
-        Element staff = document.createElement("staff");
-        company.appendChild(staff);
-        Element employee = document.createElement("employee");
-        employee.setAttribute("id","3");
-        employee.setAttribute("firstname","Nikita");
-        employee.setAttribute("lastname","Shumski");
-        staff.appendChild(employee);
-        Element tool = document.createElement("tool");
-        tool.appendChild(document.createTextNode("123456"));
-        employee.appendChild(tool);
+        Document doc = builder.parse(new File("company.xml"));
 
-        DOMSource domSource = new DOMSource(document);
-        StreamResult streamResult = new StreamResult(new File("new_company.xml"));
+        NodeList nodeList = doc.getElementsByTagName("employee");
+        for(int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+            if(Node.ELEMENT_NODE == node.getNodeType()){
+                Element innerElement = (Element) node;
+                if(innerElement.getAttribute("id").equals("2")){
+                    innerElement.getElementsByTagName("tool").item(0).setTextContent("123099");
+                }
+            }
+        }
+        //сохранение отредактированного
+        DOMSource domSource = new DOMSource(doc);
+        StreamResult streamResult = new StreamResult(new File("company.xml"));
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         transformer.transform(domSource, streamResult);
     }
 
-    private static void read(Node node){
-        NodeList nodeList = node.getChildNodes();
-        for(int i = 0; i < nodeList.getLength(); i++){
-            Node node_ = nodeList.item(i);
-            if (Node.ELEMENT_NODE == node_.getNodeType()){
-                System.out.println("Текущий узел: " + node_.getNodeName());
-                Element element = (Element) node_;
-                NamedNodeMap map = element.getAttributes();
-                for(int a = 0; a < map.getLength(); a++){
-                    String attrName = map.item(a).getNodeName();
-                    String attrValue = map.item(a).getNodeValue();
-                    System.out.println("Атрибут: " + attrName + ": значение: " + attrValue);
-                }
-                read(node_);
-            }
-        }
-    }
+//    private static void read(Node node){
+//        NodeList nodeList = node.getChildNodes();
+//        for(int i = 0; i < nodeList.getLength(); i++){
+//            Node node_ = nodeList.item(i);
+//            if (Node.ELEMENT_NODE == node_.getNodeType()){
+//                System.out.println("Текущий узел: " + node_.getNodeName());
+//                Element element = (Element) node_;
+//                NamedNodeMap map = element.getAttributes();
+//                for(int a = 0; a < map.getLength(); a++){
+//                    String attrName = map.item(a).getNodeName();
+//                    String attrValue = map.item(a).getNodeValue();
+//                    System.out.println("Атрибут: " + attrName + ": значение: " + attrValue);
+//                }
+//                read(node_);
+//            }
+//        }
+//    }
 
 
 
