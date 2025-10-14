@@ -10,15 +10,37 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
+    public Main() throws ParserConfigurationException {
+    }
+
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        //чтение документа  читает корневой элемент
+//        //чтение документа  читает корневой элемент
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        DocumentBuilder builder = factory.newDocumentBuilder();
+//        Document doc = builder.parse(new File("company.xml"));
+//
+//        Node root = doc.getDocumentElement();
+//        System.out.println("Корневой элемент: " + root.getNodeName());
+//        read(root);
+
+
+
+        // создание и запись
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(new File("company.xml"));
-
-        Node root = doc.getDocumentElement();
-        System.out.println("Корневой элемент: " + root.getNodeName());
-        read(root);
+        Document document = builder.newDocument();
+        Element root = document.createElement("root");
+        document.appendChild(root);
+        Element company = document.createElement("company");
+        document.appendChild(company);
+        Element equipment = document.createElement("equipment");
+        document.appendChild(equipment);
+        Element staff = document.createElement("staff");
+        document.appendChild(staff);
+        Element employee = document.createElement("employee");
+        employee.setAttribute("id","3");
+        employee.setAttribute("firstname","Nikita");
+        employee.setAttribute("lastname","Shumski");
     }
 
     private static void read(Node node){
@@ -38,4 +60,7 @@ public class Main {
             }
         }
     }
+
+
+
 }
