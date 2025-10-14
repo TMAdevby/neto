@@ -1,11 +1,8 @@
 package org.example.CSV_XML_JSON.XML;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,6 +20,7 @@ public class Main {
         System.out.println("Корневой элемент: " + root.getNodeName());
         read(root);
     }
+
     private static void read(Node node){
         NodeList nodeList = node.getChildNodes();
         for(int i = 0; i < nodeList.getLength(); i++){
@@ -30,7 +28,13 @@ public class Main {
             if (Node.ELEMENT_NODE == node_.getNodeType()){
                 System.out.println("Текущий узел: " + node_.getNodeName());
                 Element element = (Element) node_;
-                Name
+                NamedNodeMap map = element.getAttributes();
+                for(int a = 0; a < map.getLength(); a++){
+                    String attrName = map.item(a).getNodeName();
+                    String attrValue = map.item(a).getNodeValue();
+                    System.out.println("Атрибут: " + attrName + ": значение: " + attrValue);
+                }
+                read(node_);
             }
         }
     }
