@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
@@ -53,6 +54,26 @@ public class Main {
 //            throw new RuntimeException(e);
 //        }
 
+        //json simple write
+        JSONObject obj = new JSONObject();
+        obj.put("name", "Григорий");
+        obj.put("age", 100);
+        JSONArray list = new JSONArray();
+        list.add("msg 1");
+        list.add("msg 2");
+        list.add("msg 3");
+        obj.put("messages", list);
+        obj.put("balance", 178.2);
+        obj.put("address", null);
+        obj.put("favorite", true);
 
+        try(FileWriter file = new
+                FileWriter("new_data_2.json")){
+            file.write(obj.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
