@@ -1,0 +1,12 @@
+{
+  "address": null,
+  "balance": 178.2,
+  "name": "Григорий",
+  "messages": [
+    "msg 1",
+    "msg 2",
+    "msg 3"
+  ],
+  "favorite": true,
+  "age": 100
+}
