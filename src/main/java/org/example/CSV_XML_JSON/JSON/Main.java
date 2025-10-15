@@ -12,18 +12,21 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         //json simple read
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("data.json"));
-            JSONObject jsonObject = (JSONObject) obj;
-            System.out.println(jsonObject);
+//        JSONParser parser = new JSONParser();
+//        try {
+//            Object obj = parser.parse(new FileReader("data.json"));
+//            JSONObject jsonObject = (JSONObject) obj;
+//            System.out.println(jsonObject);
+//
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        // json simple sub object  доступ к полю объекта
+
     }
 }
