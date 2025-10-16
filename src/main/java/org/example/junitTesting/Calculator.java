@@ -10,6 +10,10 @@ public class Calculator {
         return a - b;
     }
 
+    public int multiply(int a, int b){
+        return a * b;
+    }
+
     public int devide(int a, int b){
         if(b == 0){
             throw new ArithmeticException("Деление на ноль невозможно");
