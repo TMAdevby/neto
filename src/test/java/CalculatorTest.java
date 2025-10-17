@@ -37,6 +37,6 @@ public class CalculatorTest {
         int result = calculator.add(a,b);
         //Assert
         assertThat(result).isEqualTo(-8);
-        //System.out.println(result);
+        System.out.println(result);
     }
 }
