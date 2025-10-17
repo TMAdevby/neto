@@ -14,7 +14,7 @@ public class Calculator {
         return a * b;
     }
 
-    public int devide(int a, int b){
+    public int divide(int a, int b){
         if(b == 0){
             throw new ArithmeticException("Деление на ноль невозможно");
         }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class CalculatorTest {
 
@@ -38,5 +39,19 @@ public class CalculatorTest {
         //Assert
         assertThat(result).isEqualTo(-8);
         System.out.println(result);
+    }
+
+    @Test
+    @DisplayName("Деление на ноль выбрасывает исключения")
+    void givenZeroDivisor_whenDivide_thenThrowArithmeticException(){
+        //Arrange
+        int a = 10;
+        int b = 0;
+        //Act
+        //Assert
+        assertThatThrownBy(() -> calculator.divide(a,b))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("Деление на ноль невозможно");
+
     }
 }
