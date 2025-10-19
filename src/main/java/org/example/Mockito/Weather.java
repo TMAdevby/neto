@@ -1,6 +1,6 @@
 package org.example.Mockito;
 
-enum Weather {
+public enum Weather {
     RAINY("Дождливо"),
     STORMY("Сильный ветер"),
     SUNNY("Солнечно"),
