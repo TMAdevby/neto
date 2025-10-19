@@ -1,6 +1,6 @@
 package org.example.Mockito;
 
-enum Preference {
+ public enum Preference {
     FOOTBALL("Сыграть в футбол"),
     WALKING("Выйти на прогулку"),
     WATCHING_FILMS("Посмотреть кино дома"),
