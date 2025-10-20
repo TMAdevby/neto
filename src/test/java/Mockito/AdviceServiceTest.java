@@ -30,12 +30,13 @@ class AdviceServiceTest {
                 .thenReturn(Weather.STORMY);
 
         PreferencesService preferencesService = Mockito.mock(PreferencesService.class);
-        Mockito.when(preferencesService.get("user1"))
+        Mockito.when(preferencesService.get(Mockito.any()))
                 .thenReturn(Set.of(Preference.FOOTBALL, Preference.WATCHING_FILMS, Preference.READING));
 
         AdviceService adviceService = new AdviceService(preferencesService, weatherService);
-        Set<Preference> preferences = adviceService.getAdvice("user1");
+        Set<Preference> preferences = adviceService.getAdvice(Mockito.any());
         Set<Preference> expected = Set.of(Preference.READING, Preference.WATCHING_FILMS);
+
         Assertions.assertEquals(expected, preferences);
     }
 }
