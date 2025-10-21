@@ -17,7 +17,7 @@ public class WeatherServiceImpl implements WeatherService {
     void test_spy_weather_service() {
         WeatherService weatherService = Mockito.spy(WeatherServiceImpl.class);
 
-        Mockito.when(weatherService.currentWeather()).thenReturn(Weather.STORMY);
+        Mockito.when(weatherService.currentWeather()).thenReturn(Weather.STORMY);  // если этого не написать вернется SUNNY как в реализации
 
         Assertions.assertEquals(Weather.SUNNY, weatherService.currentWeather());
 
