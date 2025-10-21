@@ -4,6 +4,8 @@ import org.example.Mockito.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
+
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 class AdviceServiceTest {
     @Test
@@ -51,10 +53,9 @@ class AdviceServiceTest {
         AdviceService adviceService = new AdviceService(preferencesService, weatherService);
         adviceService.getAdvice("user1");
 
-
-        Mockito.verify(preferencesService, Mockito.times(1)).get("user1");
-        Mockito.verify(preferencesService, Mockito.times(1)).get("user2");
-        Mockito.verify(preferencesService, Mockito.times(2)).get(Mockito.anyString());
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+        Mockito.verify(preferencesService).get(argumentCaptor.capture());
+        Assertions.assertEquals("user1", argumentCaptor.getValue());
     }
 
     @Test
