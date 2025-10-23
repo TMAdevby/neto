@@ -1,6 +1,7 @@
 package org.example.TCP_OSI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -28,11 +29,27 @@ public class Server {
                     );
 
                     PrintWriter out = new PrintWriter(
-                           clientSocket.getOutputStream(),
+                           clientSocket.getOutputStream(),true
                     );
 
+                    out.println("Привет! Отправь мне строку");
+                    String message = in.readLine();
+                    System.out.println("Получено от клиента: " + message);
+
+                    String response = String.format(
+                            "Привет, %s! Твой порт: %d",
+                            message,
+                            clientPort
+                    );
+
+                    out.println(response);
+                    System.out.println("Ответ отправлен клиенту");
+                } catch (IOException e) {
+                    System.err.println("Ошибка при работе с клиентом: " + e.getMessage());
                 }
             }
+        } catch (IOException e) {
+            System.err.println("Ошибка при работе с клиентом: " + e.getMessage());
         }
     }
 }
