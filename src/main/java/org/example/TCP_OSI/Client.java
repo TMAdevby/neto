@@ -2,6 +2,7 @@ package org.example.TCP_OSI;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
@@ -16,6 +17,20 @@ public class Client {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(socket.getInputStream())
             );
+
+            PrintWriter out = new PrintWriter(
+                    socket.getOutputStream(),true
+            );
+
+            String greating = in.readLine();
+            System.out.println("Сервер: " + greating);
+
+            String name = "Студент Java";
+            out.println(name);
+            System.out.println("Отправили: " + name);
+
+            String response = in.readLine();
+            System.out.println("Сервер: " +);
         }
     }
 }
