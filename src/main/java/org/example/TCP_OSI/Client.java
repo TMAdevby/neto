@@ -1,9 +1,11 @@
 package org.example.TCP_OSI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Client {
     public static void main(String[] args) {
@@ -30,7 +32,10 @@ public class Client {
             System.out.println("Отправили: " + name);
 
             String response = in.readLine();
-            System.out.println("Сервер: " +);
+            System.out.println("Сервер: " + response);
+
+        } catch (IOException e) {
+            System.err.println("Ошибка подключения: " + e.getMessage());
         }
     }
 }
