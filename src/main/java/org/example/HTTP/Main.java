@@ -1,5 +1,7 @@
 package org.example.HTTP;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -31,7 +33,17 @@ public class Main {
 // вывод полученных заголовков
         Arrays.stream(response.getAllHeaders()).forEach(System.out::println);
 // чтение тела ответа
-        String body = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
-        System.out.println(body);
+//        String body = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
+//        System.out.println(body);
+
+//        List<Post>posts = mapper.readValue(
+//                response.getEntity().getContent(),
+//                new TypeReference<>() {
+//                }
+//        );
+//        posts.forEach(System.out::println);
+
+        response.close();
+        httpClient.close();
     }
 }
