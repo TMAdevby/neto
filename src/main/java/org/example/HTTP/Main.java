@@ -1,15 +1,16 @@
 package org.example.HTTP;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.internal.bind.util.ISO8601Utils;
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+
+
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpHeaders;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -35,7 +36,7 @@ public class Main {
 // отправка запроса
         CloseableHttpResponse response = httpClient.execute(request);
 // вывод полученных заголовков
-        Arrays.stream(response.getAllHeaders()).forEach(System.out::println);
+        Arrays.stream(response.getHeaders()).forEach(System.out::println);
 // чтение тела ответа
 //        String body = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
 //        System.out.println(body);
