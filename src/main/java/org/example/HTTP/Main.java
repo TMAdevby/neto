@@ -3,10 +3,12 @@ package org.example.HTTP;
 
 
 import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.io.BasicHttpClientConnectionManager;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpHeaders;
 import tools.jackson.core.type.TypeReference;
@@ -16,20 +18,24 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static final String REMOTE_SERVICE_URI = "https://jsonplaceholder.typicode.com/posts";
     public static ObjectMapper mapper = new ObjectMapper();
     public static void main(String[] args) throws IOException {
 
+        ConnectionConfig connConfig = ConnectionConfig.custom()
+                .setConnectTimeout(5000, TimeUnit.SECONDS)
+                .setSocketTimeout(5000,TimeUnit.MILLISECONDS)
+                .build();
+
+        BasicHttpClientConnectionManager cm = new BasicHttpClientConnectionManager();
+        cm.setConnectionConfig(connConfig);
 
         CloseableHttpClient httpClient = HttpClientBuilder.create()
                 .setUserAgent("My Test Service")
-                .setDefaultRequestConfig(RequestConfig.custom()
-                        .setConnectTimeout(5000)
-                        .setSocketTimeout(30000)
-                        .setRedirectsEnabled(false)
-                        .build())
+                .setConnectionManager(cm)
                 .build();
 // создание объекта запроса с произвольными заголовками
         HttpGet request = new HttpGet(REMOTE_SERVICE_URI);
