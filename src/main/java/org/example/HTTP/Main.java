@@ -53,7 +53,7 @@ public class Main {
                 new TypeReference<List<Post>>() {
                 }
         );
-        posts.forEach(System.out::println);
+//        posts.forEach(System.out::println);
 
         response.close();
         httpClient.close();
