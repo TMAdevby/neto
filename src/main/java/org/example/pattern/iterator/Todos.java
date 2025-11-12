@@ -27,12 +27,32 @@ public class Todos implements Iterable<String> {
 
             @Override
             public boolean hasNext() {
-                return false;
+                if (isPrimary) {
+                    if(next < primary.size()) {
+                        return true;
+                    } else {
+                        return !secondary.isEmpty();
+                    }
+                } else {
+                    return next < secondary.size();
+                }
             }
 
             @Override
             public String next() {
-                return "";
+                if (isPrimary) {
+                    if(next < primary.size()) {
+                        String task = primary.get(next);
+                        next++;
+                        return task;
+                    } else {
+                        isPrimary = false;
+                        next = 1;
+                        return secondary.get(0);
+                    }
+                } else {
+                    return next < secondary.size();
+                }
             }
         }
     }
