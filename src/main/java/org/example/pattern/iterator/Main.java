@@ -7,5 +7,9 @@ public class Main {
                 .addPrimary("Поработать")
                 .addSecondary("Сходить в магазин")
                 .addPrimary("Провести вебинар");
+
+        for (String todo : todos){
+            System.out.println("- " + todo);
+        }
     }
 }
