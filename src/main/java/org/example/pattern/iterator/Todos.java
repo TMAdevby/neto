@@ -47,7 +47,7 @@ public class Todos implements Iterable<String> {
                         return task;
                     } else {
                         isPrimary = false;
-                        next = 1;
+                        next = 0;
                         return secondary.get(0);
                     }
                 } else {
