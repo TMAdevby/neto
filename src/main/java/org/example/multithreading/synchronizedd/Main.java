@@ -13,6 +13,7 @@ public class Main {
             synchronized (names) {
                 names.add("Имя номер " + i);
                 System.out.println("Зашел покупатель Имя номер " + i);
+                names.notify();
             }
             try {
                 Thread.sleep(300);
@@ -28,14 +29,14 @@ public class Main {
                     if (!names.isEmpty()) {
                         System.out.println("Обслужили покупателя " + names.remove(0));
                     } else {
-                        System.out.println("ПУСТО");
+                        try {
+                            names.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    return;
-                }
+
             }
         }).start();
         Thread.sleep(20000); // ждём 5 секунд

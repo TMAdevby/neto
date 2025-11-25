@@ -2,25 +2,26 @@ package org.example.multithreading.synchronizedd;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main2 {
     public static void main(String[] args) throws InterruptedException {
         List<String> buffer = new ArrayList<>();
         final Object lock = new Object();
-        boolean produced = false; // флаг: готов ли элемент
+        AtomicBoolean produced = new AtomicBoolean(false);
 
         Thread producer = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
                 synchronized (lock) {
-                    while (produced) {
+                    while (produced.get()) {
                         try {
-                            lock.wait(); // ждём, пока потребитель не заберёт
+                            lock.wait();
                         } catch (InterruptedException e) { return; }
                     }
                     buffer.add("Имя " + i);
                     System.out.println("Добавил: Имя " + i);
-                    produced = true;
-                    lock.notify(); // будим потребителя
+                    produced.set(true);
+                    lock.notify();
                 }
                 try { Thread.sleep(100); } catch (InterruptedException e) { return; }
             }
@@ -29,15 +30,15 @@ public class Main2 {
         Thread consumer = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
                 synchronized (lock) {
-                    while (!produced) {
+                    while (!produced.get()) {
                         try {
-                            lock.wait(); // ждём, пока не появится элемент
+                            lock.wait();
                         } catch (InterruptedException e) { return; }
                     }
                     String item = buffer.remove(0);
                     System.out.println("Обработал: " + item);
-                    produced = false;
-                    lock.notify(); // будим производителя
+                    produced.set(false);
+                    lock.notify();
                 }
                 try { Thread.sleep(100); } catch (InterruptedException e) { return; }
             }
