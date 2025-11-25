@@ -26,15 +26,14 @@ public class Main {
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 synchronized (names) {
-                    if (!names.isEmpty()) {
-                        System.out.println("Обслужили покупателя " + names.remove(0));
-                    } else {
+                    if (names.isEmpty()) {
                         try {
                             names.wait();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
                     }
+                    System.out.println("Обслужили покупателя " + names.remove(0));
                 }
 
             }
