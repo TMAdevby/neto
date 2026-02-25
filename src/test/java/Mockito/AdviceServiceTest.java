@@ -10,18 +10,20 @@ import org.mockito.Mockito;
 class AdviceServiceTest {
     @Test
     void test_get_advice_in_bad_weather() {
+        //задали погоду
         WeatherServiceMock weatherService = new WeatherServiceMock();
         weatherService.setValue(Weather.STORMY);
-
+        // задали увлечения
         PreferencesServiceMock preferencesService = new PreferencesServiceMock();
         preferencesService.setValue(Set.of(Preference.FOOTBALL, Preference.WATCHING_FILMS,
                 Preference.READING));
-
+        //создали объект тестируемого класса
         AdviceService adviceService = new AdviceService(preferencesService, weatherService);
-
+        // вызвали его метод, получили отфильтрованный список интересов
         Set<Preference> preferences = adviceService.getAdvice("user1");
+        // задали ожидаемый список
         Set<Preference> expected = Set.of(Preference.READING, Preference.WATCHING_FILMS);
-
+        //сравнили
         Assertions.assertEquals(expected, preferences);
     }
 
